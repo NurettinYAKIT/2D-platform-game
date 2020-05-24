@@ -1,37 +1,43 @@
 fileFormatVersion: 2
-guid: af3f1455b9e264554a7a07c32e55bf61
+guid: 7fc9888ca8fc745acacd5154691b18ee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8979192460385827557
-    second: BackgroundMountainsOrange
+      213: -7537124104242169732
+    second: AstronautSpriteAtlas_0
   - first:
-      213: 2867814667774947146
-    second: Platform01
+      213: 5452564421395691577
+    second: AstronautSpriteAtlas_1
   - first:
-      213: 115067189088952969
-    second: Platform02
+      213: -5476290194937274782
+    second: AstronautSpriteAtlas_2
   - first:
-      213: -2356764245647287336
-    second: EnvironmentSpriteAtlas_3
+      213: 5980112341523421243
+    second: AstronautSpriteAtlas_3
   - first:
-      213: 2265307819958540324
-    second: Platform03
+      213: -2075307962545467304
+    second: AstronautSpriteAtlas_4
   - first:
-      213: -4266250707248822512
-    second: Platform04
+      213: 661780225912886332
+    second: AstronautSpriteAtlas_5
   - first:
-      213: -2033761688646858496
-    second: BackgroundMountainsPurple
+      213: -844725439137277249
+    second: AstronautSpriteAtlas_6
   - first:
-      213: 5533510909823399370
-    second: BackgroundMountainsBlue
+      213: -7292798746301496257
+    second: Idle
   - first:
-      213: 6648702481031982358
-    second: ForegroundDirt
+      213: 2467699188107322655
+    second: Jump
   - first:
-      213: -4339194219721619565
-    second: ForegroundDirt
+      213: 2429855376248430252
+    second: Arm
+  - first:
+      213: -8125332585388702919
+    second: Rifle
+  - first:
+      213: -3355605324767024174
+    second: Pistol
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -75,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 5
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,8 +99,8 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
+    textureFormat: 4
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,8 +111,8 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
+    textureFormat: 4
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,8 +123,8 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
+    textureFormat: 4
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -129,13 +135,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BackgroundMountainsOrange
+      name: AstronautSpriteAtlas_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 330
-        width: 512
-        height: 91
+        x: 5
+        y: 224
+        width: 17
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5eab92b08ff7c9c70800000000000000
-      internalID: 8979192460385827557
+      spriteID: c787c928f81c66790800000000000000
+      internalID: -7537124104242169732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Platform02
+      name: AstronautSpriteAtlas_1
       rect:
         serializedVersion: 2
-        x: 28
-        y: 113
-        width: 24
-        height: 59
+        x: 38
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +170,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98223f2bffcc89100800000000000000
-      internalID: 115067189088952969
+      spriteID: 938393cc3766bab40800000000000000
+      internalID: 5452564421395691577
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnvironmentSpriteAtlas_3
+      name: AstronautSpriteAtlas_2
       rect:
         serializedVersion: 2
-        x: 60
-        y: 0
-        width: 4
-        height: 112
+        x: 71
+        y: 224
+        width: 15
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8db1adeb7671b4fd0800000000000000
-      internalID: -2356764245647287336
+      spriteID: 26e1fc3151f4004b0800000000000000
+      internalID: -5476290194937274782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Platform01
+      name: AstronautSpriteAtlas_3
       rect:
         serializedVersion: 2
-        x: 2
-        y: 113
-        width: 24
-        height: 59
+        x: 103
+        y: 224
+        width: 15
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,41 +212,146 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4f616afe368cc720800000000000000
-      internalID: 2867814667774947146
+      spriteID: b38de699d70adf250800000000000000
+      internalID: 5980112341523421243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Platform03
+      name: AstronautSpriteAtlas_4
       rect:
         serializedVersion: 2
-        x: 54
-        y: 113
-        width: 21
-        height: 59
+        x: 7
+        y: 191
+        width: 15
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4281b8bc57dff6f10800000000000000
-      internalID: 2265307819958540324
+      spriteID: 85010fc47660333e0800000000000000
+      internalID: -2075307962545467304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Platform04
+      name: AstronautSpriteAtlas_5
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 191
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c345ae4fb9d1f2900800000000000000
+      internalID: 661780225912886332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstronautSpriteAtlas_6
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 191
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fba9c7b40bee644f0800000000000000
+      internalID: -844725439137277249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 140
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f34094cdd26caca90800000000000000
+      internalID: -7292798746301496257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 140
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1528af46570f3220800000000000000
+      internalID: 2467699188107322655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arm
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 153
+        width: 12
+        height: 5
+      alignment: 9
+      pivot: {x: 0.18, y: 0.59}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cae5cdc379498b120800000000000000
+      internalID: 2429855376248430252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rifle
       rect:
         serializedVersion: 2
         x: 77
-        y: 113
-        width: 19
-        height: 59
+        y: 155
+        width: 24
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,20 +359,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 017cca7d59b3bc4c0800000000000000
-      internalID: -4266250707248822512
+      spriteID: 933000e30150d3f80800000000000000
+      internalID: -8125332585388702919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundMountainsPurple
+      name: Pistol
       rect:
         serializedVersion: 2
-        x: 0
-        y: 421
-        width: 512
-        height: 91
+        x: 77
+        y: 149
+        width: 5
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,50 +380,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 009c76ef480a6c3e0800000000000000
-      internalID: -2033761688646858496
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundMountainsBlue
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 237
-        width: 512
-        height: 91
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac5b5cccadafacc40800000000000000
-      internalID: 5533510909823399370
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ForegroundDirt
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 174
-        width: 512
-        height: 59
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 32, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3978012e8d518c3c0800000000000000
-      internalID: -4339194219721619565
+      spriteID: 2db2ad26cbe7e61d0800000000000000
+      internalID: -3355605324767024174
       vertices: []
       indices: 
       edges: []
