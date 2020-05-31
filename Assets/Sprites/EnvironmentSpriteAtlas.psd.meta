@@ -32,6 +32,12 @@ TextureImporter:
   - first:
       213: -4339194219721619565
     second: ForegroundDirt
+  - first:
+      213: -4339194219721619565
+    second: EnvironmentSpriteAtlas_8
+  - first:
+      213: 5810023584258420359
+    second: ForegroundDirt
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -133,9 +139,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 330
+        y: 329
         width: 512
-        height: 91
+        height: 92
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,22 +303,43 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ForegroundDirt
+      name: EnvironmentSpriteAtlas_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 174
-        width: 512
-        height: 59
+        x: 45
+        y: 104
+        width: 17
+        height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 32, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 3978012e8d518c3c0800000000000000
       internalID: -4339194219721619565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForegroundDirt
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 175
+        width: 512
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 18}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e6d54caa951a050800000000000000
+      internalID: 5810023584258420359
       vertices: []
       indices: 
       edges: []
