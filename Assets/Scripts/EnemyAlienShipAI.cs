@@ -6,29 +6,31 @@ using Pathfinding;
 [RequireComponent(typeof(Seeker))]
 public class EnemyAlienShipAI : MonoBehaviour
 {
+    //what to chase
     public Transform target;
     public float updateRate = 2f;
     public Path path;
     public float speed = 300f;
-    public ForceMode2D forceMode;
+    public ForceMode2D fMode;
     [HideInInspector]
     public bool pathIsEnded = false;
     //The max distance from AI to a waypoint for it to continue.
-    public float wayPointDistance = 3f;
+    public float nextWaypointDistance = 3f;
     //Caching
     private Seeker seeker;
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rb;
     private int currentWayPoint = 0;
 
 
     void Start()
     {
         seeker = GetComponent<Seeker>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
         if (target == null)
         {
             Debug.LogError("Target null?");
+            return;
         }
 
         seeker.StartPath(transform.position, target.position, OnPathComplete);
@@ -54,15 +56,25 @@ public class EnemyAlienShipAI : MonoBehaviour
             //return null;
             yield break;
         }
-        seeker.StartPath(transform.position, transform.position, OnPathComplete);
+        seeker.StartPath(transform.position, target.position, OnPathComplete);
         yield return new WaitForSeconds(1f / updateRate);
         StartCoroutine(UpdatePath());
     }
 
     void FixedUpdate()
     {
+
+        // Vector2 force = -(transform.position-target.position).normalized;
+        // float velocity = speed*Time.deltaTime;
+
+        // Debug.Log("Force" + force);
+        // Debug.Log("velocity" + velocity);
+        // rigidbody.AddForce(force*velocity,forceMode);
+
+
         if (target == null)
         {
+            Debug.Log("Target is null");
             //TODO: Insert A PLAYER SEARCH HERE.
             return;
         }
@@ -71,6 +83,7 @@ public class EnemyAlienShipAI : MonoBehaviour
 
         if (path == null)
         {
+            Debug.Log("Path is null");
             return;
         }
 
@@ -88,14 +101,17 @@ public class EnemyAlienShipAI : MonoBehaviour
 
         //Direction to the next waypoint.
         Vector3 direction = (path.vectorPath[currentWayPoint] - transform.position).normalized;
-        direction *= speed * Time.deltaTime;
+        direction *= speed * Time.fixedDeltaTime;
 
 
+        Debug.Log("Applying Force! --> " + direction);
         //Move Alien to that direction.
-        rigidbody.AddForce(direction, forceMode);
+        rb.AddForce(direction, fMode);
 
-        if (Vector3.Distance(transform.position, path.vectorPath[currentWayPoint]) < wayPointDistance)
+        float dist = Vector3.Distance(transform.position, path.vectorPath[currentWayPoint]);
+        if (dist < nextWaypointDistance)
         {
+            Debug.Log("Waypoint ++");
             currentWayPoint++;
             return;
         }
