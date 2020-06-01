@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Pathfinding;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Seeker))]
@@ -11,6 +12,7 @@ public class EnemyAlienShipAI : MonoBehaviour
     public float updateRate = 2f;
     public Path path;
     public float speed = 300f;
+    public float playerSearchInterval = 0.5f;
     public ForceMode2D fMode;
     [HideInInspector]
     public bool pathIsEnded = false;
@@ -20,6 +22,8 @@ public class EnemyAlienShipAI : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
     private int currentWayPoint = 0;
+    private bool searchingForPlayer = false;
+
 
 
     void Start()
@@ -29,13 +33,35 @@ public class EnemyAlienShipAI : MonoBehaviour
 
         if (target == null)
         {
-            Debug.LogError("Target null?");
+            if (!searchingForPlayer)
+            {
+                searchingForPlayer = true;
+                StartCoroutine(SearchPlayer());
+            }
             return;
         }
 
         seeker.StartPath(transform.position, target.position, OnPathComplete);
 
         StartCoroutine(UpdatePath());
+    }
+
+    private IEnumerator SearchPlayer()
+    {
+        GameObject result = GameObject.FindGameObjectWithTag("Player");
+        if (result == null)
+        {
+            yield return new WaitForSeconds(playerSearchInterval);
+            StartCoroutine(SearchPlayer());
+        }
+        else
+        {
+            target = result.transform;
+            searchingForPlayer = false;
+            StartCoroutine(UpdatePath());
+            yield return searchingForPlayer;
+        }
+
     }
 
     void OnPathComplete(Path p)
@@ -52,13 +78,20 @@ public class EnemyAlienShipAI : MonoBehaviour
     {
         if (target == null)
         {
-            //TODO: Insert A PLAYER SEARCH HERE.
-            //return null;
-            yield break;
+            if (!searchingForPlayer)
+            {
+                searchingForPlayer = true;
+                StartCoroutine(SearchPlayer());
+            }
+            yield return searchingForPlayer;
         }
-        seeker.StartPath(transform.position, target.position, OnPathComplete);
-        yield return new WaitForSeconds(1f / updateRate);
-        StartCoroutine(UpdatePath());
+        else
+        {
+            seeker.StartPath(transform.position, target.position, OnPathComplete);
+            yield return new WaitForSeconds(1f / updateRate);
+            StartCoroutine(UpdatePath());
+        }
+
     }
 
     void FixedUpdate()
@@ -74,12 +107,13 @@ public class EnemyAlienShipAI : MonoBehaviour
 
         if (target == null)
         {
-            Debug.Log("Target is null");
-            //TODO: Insert A PLAYER SEARCH HERE.
+            if (!searchingForPlayer)
+            {
+                searchingForPlayer = true;
+                StartCoroutine(SearchPlayer());
+            }
             return;
         }
-
-        //TODO Always look to the player.
 
         if (path == null)
         {
@@ -93,7 +127,6 @@ public class EnemyAlienShipAI : MonoBehaviour
             {
                 return;
             }
-            Debug.Log("Path is ended.");
             pathIsEnded = true;
             return;
         }
@@ -103,15 +136,12 @@ public class EnemyAlienShipAI : MonoBehaviour
         Vector3 direction = (path.vectorPath[currentWayPoint] - transform.position).normalized;
         direction *= speed * Time.fixedDeltaTime;
 
-
-        Debug.Log("Applying Force! --> " + direction);
         //Move Alien to that direction.
         rb.AddForce(direction, fMode);
 
         float dist = Vector3.Distance(transform.position, path.vectorPath[currentWayPoint]);
         if (dist < nextWaypointDistance)
         {
-            Debug.Log("Waypoint ++");
             currentWayPoint++;
             return;
         }

@@ -157,7 +157,7 @@ MonoBehaviour:
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
-  showNavGraphs: 1
+  showNavGraphs: 0
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 0
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
@@ -1369,9 +1369,10 @@ MonoBehaviour:
   target: {fileID: 1981245037}
   updateRate: 2
   speed: 300
-  forceMode: 0
+  playerSearchInterval: 0.5
+  fMode: 0
   pathIsEnded: 0
-  wayPointDistance: 3
+  nextWaypointDistance: 3
 --- !u!1 &1437279563
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public float fireRate = 0;
-    public float damage = 10;
-    public float effectSpawnRate=10;
+    public float fireRate = 0f;
+    public int damage = 10;
+    public float effectSpawnRate = 10f;
     public LayerMask whatToHit;
 
     public Transform bulletTrailPrefab;
     public Transform muzzleFlashPrefab;
-    
+
     float timeToFire = 0;
-    float timeToSpawnEffect =0;
-    
+    float timeToSpawnEffect = 0;
+
     Transform firePoint;
 
     // Start is called before the first frame update
@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour
         if (Time.time >= timeToSpawnEffect)
         {
             Effect();
-            timeToSpawnEffect = Time.time + 1/effectSpawnRate;
+            timeToSpawnEffect = Time.time + 1 / effectSpawnRate;
         }
 
         Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.cyan);
@@ -67,6 +67,11 @@ public class Weapon : MonoBehaviour
         {
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
             Debug.Log("We hit " + hit.collider.name + " and did damage " + damage);
+            Enemy enemy = hit.collider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.Damage(damage);
+            }
         }
     }
 
@@ -75,8 +80,8 @@ public class Weapon : MonoBehaviour
         Instantiate(bulletTrailPrefab, firePoint.position, firePoint.rotation);
         Transform muzzleFlashClone = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation) as Transform;
         muzzleFlashClone.parent = firePoint;
-        float size = Random.Range(0.6f,0.9f);
-        muzzleFlashClone.localScale = new Vector3(size,size,size);
-        Destroy(muzzleFlashClone.gameObject,0.02f);
+        float size = Random.Range(0.6f, 0.9f);
+        muzzleFlashClone.localScale = new Vector3(size, size, size);
+        Destroy(muzzleFlashClone.gameObject, 0.02f);
     }
 }

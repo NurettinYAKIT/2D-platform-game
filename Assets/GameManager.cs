@@ -33,4 +33,10 @@ public class GameManager : MonoBehaviour
         Destroy(player.gameObject);
         gameManager.StartCoroutine(gameManager.SpawnPlayer());
     }
+
+     public static void KillEnemy(Enemy enemy)
+    {
+        Destroy(enemy.gameObject);
+        // gameManager.StartCoroutine(gameManager.SpawnPlayer());
+    }
 }
