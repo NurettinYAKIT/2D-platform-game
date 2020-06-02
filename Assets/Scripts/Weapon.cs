@@ -13,6 +13,10 @@ public class Weapon : MonoBehaviour
     public Transform muzzleFlashPrefab;
     public Transform hitPrefab;
 
+    public float camShakeAmount = 0.05f;
+    public float camShakeLength = 0.1f;
+    CameraShake cameraShake;
+
     float timeToFire = 0;
     float timeToSpawnEffect = 0;
 
@@ -28,6 +32,14 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        cameraShake = GameManager.gameManager.GetComponent<CameraShake>();
+        if (cameraShake == null)
+        {
+            Debug.LogError(" Camera shake NOT available");
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -115,5 +127,7 @@ public class Weapon : MonoBehaviour
         float size = Random.Range(0.6f, 0.9f);
         muzzleFlashClone.localScale = new Vector3(size, size, size);
         Destroy(muzzleFlashClone.gameObject, 0.02f);
+
+        cameraShake.Shake(camShakeAmount, camShakeLength);
     }
 }

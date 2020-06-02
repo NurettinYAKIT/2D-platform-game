@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public Transform spawnPrefab;
     public float spawnDelay = 2f;
 
-    void Start()
+    private void Awake()
     {
         if (gameManager == null)
         {
@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
         GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(spawnDelay);
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
-        GameObject clone =  Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation).gameObject;
-        Destroy(clone,3f);
+        GameObject clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation).gameObject;
+        Destroy(clone, 3f);
     }
 
 
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         gameManager.StartCoroutine(gameManager.SpawnPlayer());
     }
 
-     public static void KillEnemy(Enemy enemy)
+    public static void KillEnemy(Enemy enemy)
     {
         Destroy(enemy.gameObject);
         // gameManager.StartCoroutine(gameManager.SpawnPlayer());
