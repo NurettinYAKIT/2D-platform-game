@@ -502,6 +502,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3651107603432901105, guid: 215e3dbd68468434a8ccfd0bfac139dd,
         type: 3}
+    - target: {fileID: 4470635481309398719, guid: c800b9f072a974eb0a914abfa2028c13,
+        type: 3}
+      propertyPath: whatToHit.m_Bits
+      value: 3635
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470635481309398719, guid: c800b9f072a974eb0a914abfa2028c13,
+        type: 3}
+      propertyPath: hitPrefab
+      value: 
+      objectReference: {fileID: 6078976956714852806, guid: 338a82f9ba062414e91dc2b1aaa2191b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c800b9f072a974eb0a914abfa2028c13, type: 3}
 --- !u!4 &599754252 stripped
