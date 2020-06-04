@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 393424850962343546}
   - component: {fileID: 922238734}
   - component: {fileID: 922238738}
+  - component: {fileID: 1872940386}
   m_Layer: 0
   m_Name: _GM
   m_TagString: GameManager
@@ -211,3 +212,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   shakeAmount: 0
+--- !u!114 &1872940386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393424850962343527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8525fd72780fd48f882edc58678023ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - name: Alien Invasion
+    enemy: {fileID: 8250792499644114788, guid: 978a316df048c476eb7d8b68427b8629, type: 3}
+    count: 2
+    rate: 1
+  - name: Alien Invasion 2.0
+    enemy: {fileID: 8250792499644114788, guid: 978a316df048c476eb7d8b68427b8629, type: 3}
+    count: 3
+    rate: 1.5
+  - name: Alien Invasion 3.0
+    enemy: {fileID: 8250792499644114788, guid: 978a316df048c476eb7d8b68427b8629, type: 3}
+    count: 5
+    rate: 2
+  timeBetweenWaves: 5
+  waveCountDown: 0
+  state: 2
