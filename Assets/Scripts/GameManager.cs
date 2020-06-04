@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Transform playerPrefab;
     public Transform spawnPoint;
     public Transform spawnPrefab;
+    public CameraShake cameraShake;
     public float spawnDelay = 2f;
 
     private void Awake()
@@ -18,7 +19,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator SpawnPlayer()
+    private void Start()
+    {
+        if (cameraShake == null)
+        {
+            Debug.LogError("No camera shake referenced on Gamemanager");
+        }
+    }
+
+    public IEnumerator _SpawnPlayer()
     {
         GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(spawnDelay);
@@ -31,12 +40,18 @@ public class GameManager : MonoBehaviour
     public static void KillPlayer(Player player)
     {
         Destroy(player.gameObject);
-        gameManager.StartCoroutine(gameManager.SpawnPlayer());
+        gameManager.StartCoroutine(gameManager._SpawnPlayer());
     }
 
     public static void KillEnemy(Enemy enemy)
     {
-        Destroy(enemy.gameObject);
-        // gameManager.StartCoroutine(gameManager.SpawnPlayer());
+        gameManager._KillEnemy(enemy);
+    }
+
+    public void _KillEnemy(Enemy _enemy)
+    {
+        Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);
+        cameraShake.Shake(_enemy.shakeAmount, _enemy.shakeLength);
+        Destroy(_enemy.gameObject);
     }
 }

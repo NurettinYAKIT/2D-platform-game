@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     {
         public int maxHealth = 100;
         private int _currentHealth;
+        public int damage = 40;
         public int currentHealth
         {
             get { return _currentHealth; }
@@ -26,6 +27,9 @@ public class Enemy : MonoBehaviour
     [Header("Optional:")]
     [SerializeField]
     private StatusIndicator statusIndicator;
+    public Transform deathParticles;
+    public float shakeAmount = 0.1f;
+    public float shakeLength = 0.1f;
     private void Start()
     {
         stats.Init();
@@ -33,6 +37,10 @@ public class Enemy : MonoBehaviour
         if (statusIndicator != null)
         {
             statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
+        }
+        if (deathParticles == null)
+        {
+            Debug.LogError("No death parciles on Enemy!");
         }
     }
     public void Damage(int damage)
@@ -48,6 +56,17 @@ public class Enemy : MonoBehaviour
         if (statusIndicator != null)
         {
             statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Player player = other.gameObject.GetComponent<Player>();
+
+        if (player != null)
+        {
+            player.DamagePlayer(stats.damage);
+            Damage(99999);
         }
     }
 
