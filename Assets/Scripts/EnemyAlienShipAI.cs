@@ -136,6 +136,7 @@ public class EnemyAlienShipAI : MonoBehaviour
         Vector3 direction = (path.vectorPath[currentWayPoint] - transform.position).normalized;
         direction *= speed * Time.fixedDeltaTime;
 
+        Debug.Log(""+ transform.name+" Enemy moving, direction : " + direction + " fMode : " + fMode +" path.vectorPath[currentWayPoint] : "+ path.vectorPath[currentWayPoint] + " transform.position : "+transform.position+ " speed : "+speed);
         //Move Alien to that direction.
         rb.AddForce(direction, fMode);
 
