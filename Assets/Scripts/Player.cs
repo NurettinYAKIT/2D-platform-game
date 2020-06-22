@@ -26,14 +26,27 @@ public class Player : MonoBehaviour
     public int fallBoundry = -20;
     [SerializeField]
     private StatusIndicator statusIndicator;
+
+    private AudioManager audioManager;
+    public string deathSoundName = "Death";
+    public string damageSoundName = "Damaged";
     public void DamagePlayer(int damage)
     {
         stats.currentHealth -= damage;
-        statusIndicator.SetHealth(stats.currentHealth,stats.maxHealth);
+        statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
+
         if (stats.currentHealth <= 0)
         {
+            //Sound
+            audioManager.PlaySound(deathSoundName);
+
             Debug.Log("Player Killed");
             GameManager.KillPlayer(this);
+        }
+        else
+        {
+            //Sound
+            audioManager.PlaySound(damageSoundName);
         }
     }
 
@@ -43,8 +56,15 @@ public class Player : MonoBehaviour
         if (statusIndicator == null)
         {
             Debug.LogError("Status indicator null");
-        }else{
-            statusIndicator.SetHealth(stats.currentHealth,stats.maxHealth);
+        }
+        else
+        {
+            statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
+        }
+        audioManager = AudioManager.instance;
+        if (audioManager == null)
+        {
+            Debug.LogError("No AudioManager Found! ");
         }
     }
 

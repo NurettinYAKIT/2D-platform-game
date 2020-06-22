@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
 
     private AudioManager audioManager;
 
-    public string spawnSoundName = "Respawn";
+    public string respawnCountdownSoundName = "RespawnCountdown";
+    public string spawnSoundName = "Spawn";
+    public string gameOverSoundName = "GameOver";
+
     private void Awake()
     {
         if (gameManager == null)
@@ -45,7 +48,7 @@ public class GameManager : MonoBehaviour
         }
         _remainingLives = maxLives;
 
-        audioManager = AudioManager.audioManager;
+        audioManager = AudioManager.instance;
 
         if (audioManager == null)
         {
@@ -55,15 +58,19 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        //Sound
+        audioManager.PlaySound(gameOverSoundName);
+        
         Debug.Log("GAME OVER!");
         gameOverUI.SetActive(true);
     }
     public IEnumerator _SpawnPlayer()
     {
-        audioManager.PlaySound(spawnSoundName);
+        audioManager.PlaySound(respawnCountdownSoundName);
         // GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(spawnDelay);
 
+        audioManager.PlaySound(spawnSoundName);
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
         GameObject clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation).gameObject;
         Destroy(clone, 3f);
@@ -91,8 +98,15 @@ public class GameManager : MonoBehaviour
 
     public void _KillEnemy(Enemy _enemy)
     {
+        //Sound
+        audioManager.PlaySound(_enemy.deathSoundName);
+
+        //Particles
         GameObject particleClone = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity).gameObject;
+        //CameraShake
         cameraShake.Shake(_enemy.shakeAmount, _enemy.shakeLength);
+
+        //Cleanup
         Destroy(_enemy.gameObject);
         Destroy(particleClone, 3f);
     }

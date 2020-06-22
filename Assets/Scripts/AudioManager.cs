@@ -19,13 +19,16 @@ public class Sound
     public float randomVolume = 0.1f;
     [Range(0f, 0.5f)]
     public float randomPitch = 0.1f;
-
+    public bool loop = false;
     private AudioSource source;
+
+
 
     public void SetSource(AudioSource _source)
     {
         source = _source;
         source.clip = clip;
+        source.loop = loop;
     }
 
     public void Play()
@@ -34,23 +37,34 @@ public class Sound
         source.pitch = pitch * (1 + Random.Range(-randomPitch / 2f, randomPitch / 2f));
         source.Play();
     }
+
+    public void Stop()
+    {
+        source.Stop();
+    }
 }
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager audioManager;
+    public static AudioManager instance;
 
     [SerializeField]
     Sound[] sounds;
 
     private void Awake()
     {
-        if (audioManager != null)
+        if (instance != null)
         {
-            Debug.Log("More than one audio manager.");
+
+            if (instance != this)
+            {
+                Debug.Log("More than one audio manager! Destroying it.");
+                Destroy(this.gameObject);
+            }
         }
         else
         {
-            audioManager = this;
+            instance = this;
+            DontDestroyOnLoad(this);
         }
     }
     private void Start()
@@ -62,6 +76,7 @@ public class AudioManager : MonoBehaviour
             sounds[i].SetSource(gameObject.AddComponent<AudioSource>());
         }
 
+        PlaySound("Music");
     }
 
     public void PlaySound(string _name)
@@ -71,6 +86,19 @@ public class AudioManager : MonoBehaviour
             if (sounds[i].name == _name)
             {
                 sounds[i].Play();
+                return;
+            }
+        }
+        Debug.Log("No sound with name " + _name);
+    }
+
+    public void StopSound(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == _name)
+            {
+                sounds[i].Stop();
                 return;
             }
         }

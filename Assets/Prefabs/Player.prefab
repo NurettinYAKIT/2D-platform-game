@@ -201,6 +201,8 @@ MonoBehaviour:
     maxHealth: 100
   fallBoundry: -20
   statusIndicator: {fileID: 762080002}
+  deathSoundName: Death
+  damageSoundName: Damaged
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0

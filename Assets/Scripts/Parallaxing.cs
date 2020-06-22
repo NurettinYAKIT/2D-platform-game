@@ -8,17 +8,17 @@ public class Parallaxing : MonoBehaviour
     private float[] parallaxScales;
     public float smoothing = 1f;
 
-    public Transform camera;
+    public Transform cam;
     private Vector3 previousCamPosition;
 
-    void awake()
+    void Awake()
     {
-        camera = Camera.main.transform;
+        cam = Camera.main.transform;
     }
 
     void Start()
     {
-        previousCamPosition = camera.position;
+        previousCamPosition = cam.position;
         parallaxScales = new float[backgrounds.Length];
 
         for (int i = 0; i < backgrounds.Length; i++)
@@ -32,12 +32,12 @@ public class Parallaxing : MonoBehaviour
     {
         for (int i = 0; i < backgrounds.Length; i++)
         {
-            float parallax = (previousCamPosition.x - camera.position.x) * parallaxScales[i];
+            float parallax = (previousCamPosition.x - cam.position.x) * parallaxScales[i];
             float backgroundTargetPosX = backgrounds[i].position.x + parallax;
             Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgrounds[i].position.y, backgrounds[i].position.z);
             backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);
         }
 
-        previousCamPosition = camera.position;
+        previousCamPosition = cam.position;
     }
 }

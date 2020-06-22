@@ -19,7 +19,10 @@ public class Weapon : MonoBehaviour
 
     float timeToFire = 0;
     float timeToSpawnEffect = 0;
+    public string shootSound = "DefaultShootSound";
 
+    //Caching
+    AudioManager audioManager;
     Transform firePoint;
 
     // Start is called before the first frame update
@@ -38,6 +41,11 @@ public class Weapon : MonoBehaviour
         if (cameraShake == null)
         {
             Debug.LogError(" Camera shake NOT available");
+        }
+        audioManager = AudioManager.instance;
+        if (audioManager == null)
+        {
+            Debug.LogError("No AudioManager Found! ");
         }
     }
     // Update is called once per frame
@@ -128,6 +136,10 @@ public class Weapon : MonoBehaviour
         muzzleFlashClone.localScale = new Vector3(size, size, size);
         Destroy(muzzleFlashClone.gameObject, 0.02f);
 
+        //camera shake
         cameraShake.Shake(camShakeAmount, camShakeLength);
+
+        //sound
+        audioManager.PlaySound(shootSound);
     }
 }

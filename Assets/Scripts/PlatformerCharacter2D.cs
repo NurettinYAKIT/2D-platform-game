@@ -12,6 +12,10 @@ namespace UnityStandardAssets._2D
         [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
+        [SerializeField]
+        string landingSoundName = "Landing";
+        //Cache
+        AudioManager audioManager;
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
@@ -31,12 +35,23 @@ namespace UnityStandardAssets._2D
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
             playerGraphics = transform.Find("Graphics");
-            if(playerGraphics==null){
+            if (playerGraphics == null)
+            {
                 Debug.LogError("playerGraphics is null");
             }
         }
 
+        private void Start()
+        {
+            audioManager = AudioManager.instance;
+            if (audioManager == null)
+            {
+                Debug.LogError("No AudioManager Found! ");
+            }
+        }
 
+        //this bool is used Only for the sound
+        bool wasGrounded = true;
         private void FixedUpdate()
         {
             m_Grounded = false;
@@ -50,6 +65,13 @@ namespace UnityStandardAssets._2D
                     m_Grounded = true;
             }
             m_Anim.SetBool("Ground", m_Grounded);
+
+            //Sound state
+            if (wasGrounded != m_Grounded && m_Grounded == true)
+            {
+                audioManager.PlaySound(landingSoundName);
+            }
+            wasGrounded = m_Grounded;
 
             // Set the vertical animation
             m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
@@ -75,13 +97,13 @@ namespace UnityStandardAssets._2D
             if (m_Grounded || m_AirControl)
             {
                 // Reduce the speed if crouching by the crouchSpeed multiplier
-                move = (crouch ? move*m_CrouchSpeed : move);
+                move = (crouch ? move * m_CrouchSpeed : move);
 
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
                 m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
                 // Move the character
-                m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_Rigidbody2D.velocity.y);
+                m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
                 // If the input is moving the player right and the player is facing left...
                 if (move > 0 && !m_FacingRight)
@@ -89,7 +111,7 @@ namespace UnityStandardAssets._2D
                     // ... flip the player.
                     Flip();
                 }
-                    // Otherwise if the input is moving the player left and the player is facing right...
+                // Otherwise if the input is moving the player left and the player is facing right...
                 else if (move < 0 && m_FacingRight)
                 {
                     // ... flip the player.
