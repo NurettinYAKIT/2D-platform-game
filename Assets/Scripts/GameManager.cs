@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private WaveSpawner waveSpawner;
+
+    [Range(0f, 2f)]
+    public float gameSpeed = 1.0f;
+
     private void Awake()
     {
         if (instance == null)
