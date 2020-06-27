@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gameManager;
+    public static GameManager instance;
 
     [SerializeField]
     private int maxLives = 3;
@@ -25,17 +25,28 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject gameOverUI;
 
+    [SerializeField]
+    private GameObject upgradeMenu;
+
+    public delegate void UpgradeMenuCallBack(bool active);
+    public UpgradeMenuCallBack onToggleUpgradeMenu;
     private AudioManager audioManager;
 
     public string respawnCountdownSoundName = "RespawnCountdown";
     public string spawnSoundName = "Spawn";
     public string gameOverSoundName = "GameOver";
 
+    [SerializeField]
+    private int startingMoney;
+    public static int money;
+
+    [SerializeField]
+    private WaveSpawner waveSpawner;
     private void Awake()
     {
-        if (gameManager == null)
+        if (instance == null)
         {
-            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            instance = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
         _remainingLives = maxLives;
     }
@@ -47,6 +58,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("No camera shake referenced on Gamemanager");
         }
         _remainingLives = maxLives;
+        money = startingMoney;
 
         audioManager = AudioManager.instance;
 
@@ -56,11 +68,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            ToggleUpgradeMenu();
+        }
+    }
+
+    private void ToggleUpgradeMenu()
+    {
+        upgradeMenu.SetActive(!upgradeMenu.activeSelf);
+        waveSpawner.enabled = !upgradeMenu.activeSelf;
+        onToggleUpgradeMenu.Invoke(upgradeMenu.activeSelf);
+    }
+
     public void EndGame()
     {
         //Sound
         audioManager.PlaySound(gameOverSoundName);
-        
+
         Debug.Log("GAME OVER!");
         gameOverUI.SetActive(true);
     }
@@ -83,17 +110,17 @@ public class GameManager : MonoBehaviour
         _remainingLives -= 1;
         if (_remainingLives <= 0)
         {
-            gameManager.EndGame();
+            instance.EndGame();
         }
         else
         {
-            gameManager.StartCoroutine(gameManager._SpawnPlayer());
+            instance.StartCoroutine(instance._SpawnPlayer());
         }
     }
 
     public static void KillEnemy(Enemy enemy)
     {
-        gameManager._KillEnemy(enemy);
+        instance._KillEnemy(enemy);
     }
 
     public void _KillEnemy(Enemy _enemy)
@@ -105,6 +132,9 @@ public class GameManager : MonoBehaviour
         GameObject particleClone = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity).gameObject;
         //CameraShake
         cameraShake.Shake(_enemy.shakeAmount, _enemy.shakeLength);
+
+        money += _enemy.moneyDrop;
+        audioManager.PlaySound("Money");
 
         //Cleanup
         Destroy(_enemy.gameObject);

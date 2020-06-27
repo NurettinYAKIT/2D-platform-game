@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 922238734}
   - component: {fileID: 922238738}
   - component: {fileID: 2039977564}
+  - component: {fileID: 544810011}
   m_Layer: 0
   m_Name: _GM
   m_TagString: GameManager
@@ -86,7 +87,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   smoothing: 1
-  camera: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!114 &393424850962343546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,12 +100,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f8cf950fbeb45b8b603da2e82084e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLives: 3
   playerPrefab: {fileID: 400002, guid: 87a2357765801c34292d6718d8b4d770, type: 3}
   spawnPoint: {fileID: 1167691728}
   spawnPrefab: {fileID: 7877980546127853437, guid: 75129a630a1dd4322a2487bb68570201,
     type: 3}
   cameraShake: {fileID: 922238738}
   spawnDelay: 3.5
+  gameOverUI: {fileID: 0}
+  upgradeMenu: {fileID: 0}
+  respawnCountdownSoundName: RespawnCountdown
+  spawnSoundName: Spawn
+  gameOverSoundName: GameOver
+  startingMoney: 100
+  waveSpawner: {fileID: 2039977564}
 --- !u!82 &922238734
 AudioSource:
   m_ObjectHideFlags: 0
@@ -246,6 +255,21 @@ MonoBehaviour:
   - {fileID: 6944094161508879258}
   timeBetweenWaves: 5
   state: 2
+--- !u!114 &544810011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393424850962343527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7abbc2eb675874400be27541c066952d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthRegenRate: 2
+  movementSpeed: 10
 --- !u!1001 &393424851459213881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -261,12 +285,12 @@ PrefabInstance:
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.5450735
+      value: -8.31
       objectReference: {fileID: 0}
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.762951
+      value: 8.19
       objectReference: {fileID: 0}
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}
@@ -336,12 +360,12 @@ PrefabInstance:
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.885073
+      value: -17.98
       objectReference: {fileID: 0}
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.63705
+      value: -10.32
       objectReference: {fileID: 0}
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}
@@ -411,12 +435,12 @@ PrefabInstance:
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.444927
+      value: 14.22
       objectReference: {fileID: 0}
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5429506
+      value: 9.33
       objectReference: {fileID: 0}
     - target: {fileID: 7290159051796747288, guid: 6bbc0230ca7784f78b2afe351fe1deda,
         type: 3}

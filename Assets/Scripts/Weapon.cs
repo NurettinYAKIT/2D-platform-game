@@ -37,7 +37,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        cameraShake = GameManager.gameManager.GetComponent<CameraShake>();
+        cameraShake = GameManager.instance.GetComponent<CameraShake>();
         if (cameraShake == null)
         {
             Debug.LogError(" Camera shake NOT available");

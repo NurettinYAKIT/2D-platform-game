@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyAlienShipAI))]
 public class Enemy : MonoBehaviour
 {
     [System.Serializable]
@@ -31,6 +32,8 @@ public class Enemy : MonoBehaviour
     public float shakeAmount = 0.1f;
     public float shakeLength = 0.1f;
     public string deathSoundName = "Explosion";
+
+    public int moneyDrop = 10;
     private void Start()
     {
         stats.Init();
@@ -43,6 +46,8 @@ public class Enemy : MonoBehaviour
         {
             Debug.LogError("No death parciles on Enemy!");
         }
+        GameManager.instance.onToggleUpgradeMenu += OnUpgrageMenuToggle;
+
     }
     public void Damage(int damage)
     {
@@ -69,6 +74,18 @@ public class Enemy : MonoBehaviour
             player.DamagePlayer(stats.damage);
             Damage(99999);
         }
+    }
+
+    private void OnUpgrageMenuToggle(bool active)
+    {
+        Debug.Log("Paused.");
+        GetComponent<EnemyAlienShipAI>().enabled = !active;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.onToggleUpgradeMenu -= OnUpgrageMenuToggle;
+
     }
 
 }

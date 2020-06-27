@@ -147,6 +147,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 2103
+  landingSoundName: Landing
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,7 +788,7 @@ PrefabInstance:
     - target: {fileID: 4470635481309398719, guid: c800b9f072a974eb0a914abfa2028c13,
         type: 3}
       propertyPath: fireRate
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4470635481309398719, guid: c800b9f072a974eb0a914abfa2028c13,
         type: 3}
@@ -806,6 +807,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6078976956714852806, guid: 338a82f9ba062414e91dc2b1aaa2191b,
         type: 3}
+    - target: {fileID: 4470635481309398719, guid: c800b9f072a974eb0a914abfa2028c13,
+        type: 3}
+      propertyPath: damage
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c800b9f072a974eb0a914abfa2028c13, type: 3}
 --- !u!4 &599754252 stripped
